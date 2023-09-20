@@ -1,10 +1,6 @@
-type ProductDescriptionType = {
-	name: string;
-	category: string;
-	price: number;
-};
+import { type IProductDescription } from "@/types";
 
-export const ProductsListItemDescription = ({ name, category, price }: ProductDescriptionType) => {
+export const ProductsListItemDescription = ({ name, category, price }: IProductDescription) => {
 	return (
 		<div className="mt-3 flex w-4/5 justify-between sm:w-11/12">
 			<div className="flex flex-col items-start">
