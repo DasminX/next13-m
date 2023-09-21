@@ -1,7 +1,7 @@
 import { ProductsListItem } from "../molecules/ProductListItem";
-import { type IProduct } from "@/types";
+import { type BackendProduct } from "@/types";
 
-export const ProductsList = ({ products }: { products: IProduct[] }) => {
+export const ProductsList = ({ products }: { products: BackendProduct[] }) => {
 	return (
 		<ul
 			className="my-8 grid w-full grid-cols-1 items-center justify-around gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"

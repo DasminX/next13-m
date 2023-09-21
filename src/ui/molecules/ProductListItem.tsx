@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { ProductsListItemDescription } from "../atoms/ProductsListItemDescription";
 import { ProductsListItemImage } from "../atoms/ProductsListItemImage";
-import { type IProduct } from "@/types";
+import { type BackendProduct } from "@/types";
 
-export const ProductsListItem = ({ product }: { product: IProduct }) => {
+export const ProductsListItem = ({ product }: { product: BackendProduct }) => {
 	return (
 		<article>
-			<Link href={`/products/${product.id}`}>
-				<ProductsListItemImage src={product.src} alt={product.alt} />
+			<Link href={`/product/${product.id}`}>
+				<ProductsListItemImage src={product.image} alt={product.description} />
 			</Link>
 			<ProductsListItemDescription
-				name={product.name}
+				title={product.title}
 				category={product.category}
 				price={product.price}
 			/>

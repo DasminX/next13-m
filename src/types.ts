@@ -1,18 +1,3 @@
-export interface IProductImage {
-	src: string;
-	alt: string;
-}
-
-export interface IProductDescription {
-	name: string;
-	category: string;
-	price: number;
-}
-
-export interface IProduct extends IProductImage, IProductDescription {
-	id: string;
-}
-
 export type BackendProduct = {
 	id: string;
 	title: string;

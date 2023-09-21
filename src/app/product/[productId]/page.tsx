@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { type Metadata } from "next";
-import { type IProduct, type BackendProduct } from "@/types";
+import { type BackendProduct } from "@/types";
 import { ProductHeader } from "@/ui/organisms/ProductHeader";
 import { RecommendedProducts } from "@/ui/organisms/RecommendedProducts";
 import { LoadingSpinner } from "@/ui/atoms/LoadingSpinner";
+import { FancyHeader } from "@/ui/atoms/FancyHeader";
 
 export async function generateMetadata({
 	params,
@@ -11,10 +12,10 @@ export async function generateMetadata({
 	params: { productId: string };
 }): Promise<Metadata> {
 	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${params.productId}`);
-	const product = (await res.json()) as { name: string; description: string };
+	const product = (await res.json()) as { title: string; description: string };
 
 	return {
-		title: product.name,
+		title: product.title,
 		description: product.description,
 	};
 }
@@ -25,23 +26,18 @@ export default async function ProductPage({ params }: { params: { productId: str
 		`https://naszsklep-api.vercel.app/api/products/${params.productId}`,
 	);
 	const product = (await response.json()) as BackendProduct;
-	const IProductprod: IProduct = {
-		id: product.id,
-		name: product.title,
-		category: product.category,
-		price: product.price,
-		src: product.image,
-		alt: product.description,
-	};
+	if (!product) {
+		return <FancyHeader>Problem</FancyHeader>;
+	}
 
 	return (
 		<section className="min-h-screen w-full">
 			<ProductHeader
-				imageSrc={IProductprod.src}
-				imageAlt={IProductprod.alt}
-				name={IProductprod.name}
-				description={IProductprod.alt}
-				price={IProductprod.price}
+				imageSrc={product.image}
+				imageAlt={product.description}
+				name={product.title}
+				description={product.description}
+				price={product.price}
 			/>
 			<Suspense fallback={<LoadingSpinner />}>
 				<RecommendedProducts />

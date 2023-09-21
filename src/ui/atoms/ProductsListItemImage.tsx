@@ -1,7 +1,13 @@
 import Image from "next/image";
-import type { IProductImage } from "@/types";
+import { type BackendProduct } from "@/types";
 
-export const ProductsListItemImage = ({ src, alt }: IProductImage) => {
+export const ProductsListItemImage = ({
+	src,
+	alt,
+}: {
+	src: BackendProduct["image"];
+	alt: BackendProduct["description"];
+}) => {
 	return (
 		<div className="aspect-square overflow-hidden rounded-md border-2 border-gray-200">
 			<Image
