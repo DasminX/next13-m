@@ -1,17 +1,20 @@
 import Link from "next/link";
 import { ProductsListItemDescription } from "../atoms/ProductsListItemDescription";
 import { ProductsListItemImage } from "../atoms/ProductsListItemImage";
-import { type BackendProduct } from "@/types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 
-export const ProductsListItem = ({ product }: { product: BackendProduct }) => {
+export const ProductsListItem = ({ product }: { product: ProductListItemFragment }) => {
+	if (!product.images[0] || !product.categories[0]) {
+		return <></>;
+	}
 	return (
 		<article>
 			<Link href={`/product/${product.id}`}>
-				<ProductsListItemImage src={product.image} alt={product.description} />
+				<ProductsListItemImage src={product.images} alt={product.description} />
 			</Link>
 			<ProductsListItemDescription
-				title={product.title}
-				category={product.category}
+				name={product.name}
+				category={product.categories}
 				price={product.price}
 			/>
 		</article>

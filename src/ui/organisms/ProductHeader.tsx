@@ -1,5 +1,6 @@
 import { FancyHeader } from "../atoms/FancyHeader";
 import { ProductsListItemImage } from "../atoms/ProductsListItemImage";
+import { type ProductListItemFragment } from "@/gql/graphql";
 
 export const ProductHeader = ({
 	imageSrc,
@@ -8,7 +9,7 @@ export const ProductHeader = ({
 	description,
 	price,
 }: {
-	imageSrc: string;
+	imageSrc: ProductListItemFragment["images"];
 	imageAlt: string;
 	name: string;
 	description: string;
@@ -23,7 +24,6 @@ export const ProductHeader = ({
 			<div className="mx-auto w-auto max-w-max p-8 text-center leading-8">
 				<p>{description}</p>
 				<p>
-					{" "}
 					{Intl.NumberFormat("pl-PL", {
 						style: "currency",
 						currency: "PLN",

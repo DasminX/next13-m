@@ -25,6 +25,7 @@ export const ActiveLink = ({
 	const isActive = exact ? href === pathname : pathname.startsWith(href);
 	return (
 		<Link
+			aria-current={isActive}
 			href={href}
 			className={`transition duration-100 hover:scale-105 hover:underline ${className ?? ""} ${
 				activeClassName ?? ""

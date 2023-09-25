@@ -8,7 +8,7 @@ export const Pagination = ({ page }: { page: number }) => {
 	}
 
 	return (
-		<div className="mx-auto flex w-fit items-center justify-evenly p-4">
+		<div aria-label={"pagination"} className="mx-auto flex w-fit items-center justify-evenly p-4">
 			{pages.map((pageNumber) => {
 				return (
 					<ActiveLink

@@ -13,9 +13,9 @@ export const LoadingSpinner = () => {
 				cy="50"
 				fill="none"
 				stroke="#7be7e9"
-				stroke-width="3"
+				strokeWidth="3"
 				r="8"
-				stroke-dasharray="37.69911184307752 14.566370614359172"
+				strokeDasharray="37.69911184307752 14.566370614359172"
 			>
 				<animateTransform
 					attributeName="transform"

@@ -1,6 +1,8 @@
 import { FancyHeader } from "../atoms/FancyHeader";
 import { ProductsList } from "./ProductsList";
-import { type BackendProduct } from "@/types";
+import { executeGraphql } from "@/utils/graphqlFetcher";
+import { type ProductListItemFragment, ProductsGetListDocument } from "@/gql/graphql";
+import { getRandomProducts } from "@/app/lib/randomProducts";
 
 const sleep = (duration: number) => {
 	return new Promise<void>((res) =>
@@ -11,18 +13,20 @@ const sleep = (duration: number) => {
 };
 
 export const RecommendedProducts = async () => {
-	const offset = Math.floor(Math.random() * 15);
-	const response: Response = await fetch(
-		`https://naszsklep-api.vercel.app/api/products?take=4&offset=${offset}`,
-	);
-	await Promise.all([response, sleep(5000)]);
+	const dur = Math.random() * 5000;
+	await sleep(dur);
+	const { products } = await executeGraphql(ProductsGetListDocument);
 
-	const products = (await response.json()) as BackendProduct[];
+	if (!products) {
+		return <></>;
+	}
+
+	const randomProducts: ProductListItemFragment[] = getRandomProducts(products, 4);
 
 	return (
 		<>
 			<FancyHeader>Recommended products for you and only for you!!!</FancyHeader>
-			<ProductsList products={products}></ProductsList>
+			<ProductsList products={randomProducts}></ProductsList>
 		</>
 	);
 };
